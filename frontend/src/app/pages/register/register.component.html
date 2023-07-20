@@ -1,5 +1,5 @@
 <main class="form-signin w-100 m-auto">
-  <form>
+  <form [formGroup]="register_form" (ngSubmit)="onSubmit()">
     <h1 class="h3 mb-3 fw-normal">Please Register</h1>
 
     <div class="form-floating">
@@ -8,6 +8,7 @@
         class="form-control"
         id="floatingfname"
         placeholder="Your First Name"
+        formControlName="first_name"
       />
       <label for="floatingfname">First Name</label>
     </div>
@@ -18,6 +19,7 @@
         class="form-control"
         id="floatinglname"
         placeholder="Your Last Name"
+        formControlName="last_name"
       />
       <label for="floatinglname">Last name</label>
     </div>
@@ -28,6 +30,7 @@
         class="form-control"
         id="floatingInput"
         placeholder="name@example.com"
+        formControlName="email"
       />
       <label for="floatingInput">Email address</label>
     </div>
@@ -37,6 +40,7 @@
         class="form-control"
         id="floatingPassword"
         placeholder="Password"
+        formControlName="password"
       />
       <label for="floatingPassword">Password</label>
     </div>
@@ -47,6 +51,7 @@
         class="form-control"
         id="floatingPasswordC"
         placeholder="Confirm Password"
+        formControlName="password_confirm"
       />
       <label for="floatingPasswordC">Confirm Password</label>
     </div>

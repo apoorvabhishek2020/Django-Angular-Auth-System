@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -7,19 +10,20 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  form!: FormGroup;
-
-  constructor(
-    private formBuilder: FormBuilder
-  ){}
-
-  ngOnInit(): void {
-    this.form = this.formBuilder.group(controlsConfig:{
-      first_name: '',
-      last_name: '',
-      email: '',
-      password: '',
-      password_confirm: ''
-    })
+  register_form = new FormGroup({
+    first_name: new FormControl(''),
+    last_name: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl(''),
+    password_confirm: new FormControl(''),
+  });
+  constructor(private router: Router, private authService: AuthService) {}
+  onSubmit() {
+    this.authService
+      .register(this.register_form.getRawValue())
+      .subscribe((responseData) => {
+        console.log(responseData);
+        this.router.navigate(['/login']);
+      });
   }
 }
